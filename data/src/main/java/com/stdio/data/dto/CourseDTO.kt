@@ -13,10 +13,10 @@ data class CourseDTO(
     val text: String,
 
     @SerializedName("price")
-    val price: Int,
+    val price: String,
 
     @SerializedName("rate")
-    val rate: Double,
+    val rate: String,
 
     @SerializedName("startDate")
     val startDate: String,

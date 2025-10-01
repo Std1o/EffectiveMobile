@@ -23,6 +23,7 @@ class CoursesRepositoryImpl @Inject constructor(
                 emptyList()
             }
         } catch (e: Exception) {
+            e.printStackTrace()
             emptyList()
         }
     }

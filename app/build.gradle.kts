@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.devtools.ksp)
 }
 
 android {
@@ -48,6 +49,10 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":data"))
+    implementation(project(":domain"))
+
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.fragment:fragment-ktx:1.6.1")
