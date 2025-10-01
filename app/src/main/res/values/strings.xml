@@ -7,4 +7,6 @@
     <string name="email_hint">example@gmail.com</string>
     <string name="password_hint">Введите пароль</string>
     <string name="password">Пароль</string>
+    <string name="registration">Нету аккаунта? <font color='#12B956'>Регитрация</font></string>
+    <string name="forgot_password">Забыл пароль</string>
 </resources>
