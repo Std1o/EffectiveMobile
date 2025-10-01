@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "EffectiveMobile"
 include(":app")
+include(":core")
+include(":data")
+include(":domain")
