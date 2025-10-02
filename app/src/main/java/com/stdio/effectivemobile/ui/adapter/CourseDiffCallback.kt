@@ -10,13 +10,13 @@ class CourseDiffCallback : DiffUtil.ItemCallback<Course>() {
     }
 
     override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean {
-        // Сравниваем все поля кроме hasLike (так как оно может меняться при добавлении в избранное)
         return oldItem.title == newItem.title &&
                 oldItem.text == newItem.text &&
                 oldItem.price == newItem.price &&
                 oldItem.rate == newItem.rate &&
                 oldItem.startDate == newItem.startDate &&
-                oldItem.publishDate == newItem.publishDate
+                oldItem.publishDate == newItem.publishDate &&
+                oldItem.hasLike == newItem.hasLike
     }
 
     override fun getChangePayload(oldItem: Course, newItem: Course): Any? {
