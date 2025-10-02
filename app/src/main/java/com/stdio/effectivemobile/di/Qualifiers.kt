@@ -9,3 +9,7 @@ annotation class LoginViewModelFactory
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
 annotation class HomeViewModelFactory
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class FavoritesViewModelFactory

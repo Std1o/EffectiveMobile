@@ -42,7 +42,7 @@ class CoursesRepositoryImpl @Inject constructor(
         favoritesDao.removeFromFavorites(CourseToCourseEntityMapper.map(course))
     }
 
-    override suspend fun getFavoriteCourses() =
+    override val favorites =
         favoritesDao.getAllFavorites().map { it.map(CourseEntityToCourseMapper::map) }
 
     override suspend fun isCourseFavorite(courseId: Int): Boolean {

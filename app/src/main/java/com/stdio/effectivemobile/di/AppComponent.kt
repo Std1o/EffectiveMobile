@@ -2,14 +2,14 @@ package com.stdio.effectivemobile.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.stdio.core.di.CoreComponent
 import com.stdio.data.di.DataComponent
 import com.stdio.domain.repository.CoursesRepository
 import com.stdio.domain.usecases.IsInputValidUseCase
 import com.stdio.domain.usecases.ToggleFavoriteUseCase
-import com.stdio.effectivemobile.ui.home.HomeViewModel
-import com.stdio.effectivemobile.MainActivity
+import com.stdio.effectivemobile.ui.favorites.FavoritesFragment
+import com.stdio.effectivemobile.ui.favorites.FavoritesViewModel
 import com.stdio.effectivemobile.ui.home.HomeFragment
+import com.stdio.effectivemobile.ui.home.HomeViewModel
 import com.stdio.effectivemobile.ui.login.LoginFragment
 import com.stdio.effectivemobile.ui.login.LoginViewModel
 import dagger.Component
@@ -25,6 +25,7 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(fragment: LoginFragment)
     fun inject(fragment: HomeFragment)
+    fun inject(fragment: FavoritesFragment)
 
     @Component.Factory
     interface Factory {
@@ -56,6 +57,19 @@ class HomeModule {
         return object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return LoginViewModel(inputValidUseCase) as T
+            }
+        }
+    }
+
+    @Provides
+    @FavoritesViewModelFactory
+    fun provideFavoritesViewModelFactory(
+        repository: CoursesRepository,
+        toggleFavoriteUseCase: ToggleFavoriteUseCase
+    ): ViewModelProvider.Factory {
+        return object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return FavoritesViewModel(repository, toggleFavoriteUseCase) as T
             }
         }
     }

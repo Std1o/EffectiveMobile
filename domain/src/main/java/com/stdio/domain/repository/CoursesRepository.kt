@@ -8,6 +8,6 @@ interface CoursesRepository {
     suspend fun getCourses(): LoadableData<List<Course>>
     suspend fun addToFavorites(course: Course)
     suspend fun removeFromFavorites(course: Course)
-    suspend fun getFavoriteCourses(): Flow<List<Course>>
+    val favorites: Flow<List<Course>>
     suspend fun isCourseFavorite(courseId: Int): Boolean
 }
