@@ -1,5 +1,6 @@
 package com.stdio.effectivemobile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -28,5 +29,6 @@ class MainActivity : AppCompatActivity() {
         }
         (application as App).appComponent.inject(this)
         viewModel.getData()
+        startActivity(Intent(this, MainHostActivity::class.java))
     }
 }

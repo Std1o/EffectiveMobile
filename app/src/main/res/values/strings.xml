@@ -9,4 +9,8 @@
     <string name="password">Пароль</string>
     <string name="registration">Нету аккаунта? <font color='#12B956'>Регитрация</font></string>
     <string name="forgot_password">Забыл пароль</string>
+    <string name="title_activity_main_host">MainHostActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
