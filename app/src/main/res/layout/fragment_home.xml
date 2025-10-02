@@ -52,4 +52,9 @@
         android:drawablePadding="4dp"
         app:drawableEndCompat ="@drawable/ic_arrow_down_up"
         android:text="@string/by_date" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCourses"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

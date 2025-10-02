@@ -7,6 +7,7 @@ import com.stdio.data.di.DataComponent
 import com.stdio.domain.repository.CoursesRepository
 import com.stdio.effectivemobile.HomeViewModel
 import com.stdio.effectivemobile.MainActivity
+import com.stdio.effectivemobile.ui.home.HomeFragment
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,7 @@ import javax.inject.Singleton
     dependencies = [DataComponent::class] // Зависим от DataComponent
 )
 interface AppComponent {
-    fun inject(activity: MainActivity)
+    fun inject(fragment: HomeFragment)
 
     @Component.Factory
     interface Factory {
