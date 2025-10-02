@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">EffectiveMobile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Вход</string>
+    <string name="email">Email</string>
+    <string name="email_hint">example@gmail.com</string>
+    <string name="password_hint">Введите пароль</string>
+    <string name="password">Пароль</string>
+    <string name="registration">Нету аккаунта? <font color='#12B956'>Регитрация</font></string>
+    <string name="forgot_password">Забыл пароль</string>
+    <string name="title_activity_main_host">MainHostActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="search_courses">Search courses...</string>
+    <string name="by_date">По дате добавления</string>
+    <string name="more">Подробнее</string>
+    <string name="price">%s ₽</string>
+    <string name="main">Главная</string>
+    <string name="favorite">Избранное</string>
+    <string name="account">Аккаунт</string>
 </resources>
