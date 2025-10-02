@@ -1,7 +1,9 @@
 package com.stdio.effectivemobile.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -24,5 +26,9 @@ class CoursesHostFragment : Fragment(R.layout.fragment_courses_host) {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         navView.setupWithNavController(navController)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            requireActivity().window.navigationBarColor = ContextCompat.getColor(requireActivity(), R.color.dark_gray)
+        }
     }
 }
