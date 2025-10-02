@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.stdio.domain.model.Course
 import com.stdio.domain.model.LoadableData
 import com.stdio.effectivemobile.R
@@ -39,11 +40,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collect {
                 when (it.courses) {
-                    is LoadableData.Error -> {}
                     is LoadableData.Success<List<Course>> -> adapter.submitList(it.courses.data)
                     else -> {}
                 }
                 binding.progressBar.isVisible = it.courses is LoadableData.Loading
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.errorFlow.collect {
+                Snackbar.make(view, it, Snackbar.LENGTH_SHORT).show()
             }
         }
     }
