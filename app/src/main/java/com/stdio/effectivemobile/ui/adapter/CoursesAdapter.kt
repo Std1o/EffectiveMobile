@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.stdio.domain.model.Course
 import com.stdio.effectivemobile.R
 import com.stdio.effectivemobile.databinding.ItemCourseBinding

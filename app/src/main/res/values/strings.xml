@@ -17,4 +17,7 @@
     <string name="by_date">По дате добавления</string>
     <string name="more">Подробнее</string>
     <string name="price">%s ₽</string>
+    <string name="main">Главная</string>
+    <string name="favorite">Избранное</string>
+    <string name="account">Аккаунт</string>
 </resources>
