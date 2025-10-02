@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import com.stdio.effectivemobile.databinding.FragmentHomeBinding
 import com.stdio.effectivemobile.di.HomeViewModelFactory
 import com.stdio.effectivemobile.model.CoursesUIState
 import com.stdio.effectivemobile.ui.adapter.CoursesAdapter
+import com.stdio.effectivemobile.ui.favorites.FavoritesFragment.Companion.ON_FAVORITES_UPDATE_KEY
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -45,11 +47,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.errorFlow.observe(viewLifecycleOwner, result = {
             Snackbar.make(view, it, Snackbar.LENGTH_SHORT).show()
         })
-    }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getCourses()
+        setFragmentResultListener(ON_FAVORITES_UPDATE_KEY) { requestKey, bundle ->
+            viewModel.getCourses()
+        }
     }
 
     private fun updateView(uiState: CoursesUIState) {

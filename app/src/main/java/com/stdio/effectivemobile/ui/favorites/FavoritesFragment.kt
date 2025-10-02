@@ -2,7 +2,9 @@ package com.stdio.effectivemobile.ui.favorites
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +33,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private val adapter = CoursesAdapter(
         onFavoriteClick = { course ->
             viewModel.toggleFavorite(course)
+            setFragmentResult(ON_FAVORITES_UPDATE_KEY, bundleOf())
         }
     )
 
@@ -51,5 +54,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private fun setupRecyclerView() {
         binding.rvFavorites.adapter = adapter
         binding.rvFavorites.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    companion object {
+        const val ON_FAVORITES_UPDATE_KEY = "ON_FAVORITES_UPDATE_KEY"
     }
 }

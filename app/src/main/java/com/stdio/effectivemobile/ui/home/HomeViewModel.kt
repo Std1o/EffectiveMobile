@@ -28,6 +28,10 @@ class HomeViewModel @Inject constructor(
     private val _errorFlow = SingleEventFlow<String>()
     val errorFlow = _errorFlow.asSharedFlow()
 
+    init {
+        getCourses()
+    }
+
     fun getCourses() {
         viewModelScope.launch {
             loadData { repository.getCourses() }.collect { courses ->
