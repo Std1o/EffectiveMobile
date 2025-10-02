@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.stdio.core.di.CoreComponent
 import com.stdio.data.di.DataComponent
 import com.stdio.domain.repository.CoursesRepository
-import com.stdio.effectivemobile.HomeViewModel
+import com.stdio.effectivemobile.ui.home.HomeViewModel
 import com.stdio.effectivemobile.MainActivity
 import com.stdio.effectivemobile.ui.home.HomeFragment
 import dagger.Component
