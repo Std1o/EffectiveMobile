@@ -51,6 +51,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setFragmentResultListener(ON_FAVORITES_UPDATE_KEY) { requestKey, bundle ->
             viewModel.getCourses()
         }
+
+        binding.tvSort.setOnClickListener {
+            adapter.submitList(adapter.currentList.sortedByDescending { it.publishDate })
+        }
     }
 
     private fun updateView(uiState: CoursesUIState) {
