@@ -1,5 +1,7 @@
 package com.stdio.effectivemobile.ui.login
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -20,6 +22,7 @@ import com.stdio.effectivemobile.di.LoginViewModelFactory
 import com.stdio.effectivemobile.ui.home.HomeViewModel
 import javax.inject.Inject
 import kotlin.getValue
+import androidx.core.net.toUri
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -41,6 +44,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         viewModel.isButtonEnabled.observe(viewLifecycleOwner, result = {
             binding.button.isEnabled = it
         })
+
+        binding.btnVk.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, "https://vk.com/".toUri())
+            startActivity(browserIntent)
+        }
+        binding.btnOk.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, "https://ok.ru/".toUri())
+            startActivity(browserIntent)
+        }
     }
 
     private fun disableCyrillic() {
