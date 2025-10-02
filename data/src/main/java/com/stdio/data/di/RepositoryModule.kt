@@ -2,6 +2,7 @@ package com.stdio.data.di
 
 import com.stdio.data.api.CoursesApi
 import com.stdio.data.dao.FavoritesDao
+import com.stdio.data.remote.CoursesRemoteDataSource
 import com.stdio.data.repository.CoursesRepositoryImpl
 import com.stdio.domain.repository.CoursesRepository
 import dagger.Module
@@ -13,7 +14,7 @@ class RepositoryModule {
 
     @Provides
     fun provideCoursesRepository(
-        api: CoursesApi,
+        remoteDataSource: CoursesRemoteDataSource,
         favoritesDao: FavoritesDao
-    ): CoursesRepository = CoursesRepositoryImpl(api, favoritesDao)
+    ): CoursesRepository = CoursesRepositoryImpl(remoteDataSource, favoritesDao)
 }

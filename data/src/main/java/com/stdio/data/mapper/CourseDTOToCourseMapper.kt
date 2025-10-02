@@ -1,11 +1,11 @@
 package com.stdio.data.mapper
 
 import com.stdio.data.dto.CourseDTO
-import com.stdio.domain.mapper.Mapper
+import com.stdio.domain.mapper.LoadableDataListMapper
 import com.stdio.domain.model.Course
 
-object CourseDTOToCourseMapper : Mapper<CourseDTO, Course> {
-    override fun map(input: CourseDTO) = Course(
+object CourseDTOToCourseMapper : LoadableDataListMapper<CourseDTO, Course>() {
+    override fun getSuccess(input: CourseDTO): Course = Course(
         id = input.id,
         title = input.title,
         text = input.text,

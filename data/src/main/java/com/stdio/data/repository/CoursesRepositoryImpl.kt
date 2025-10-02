@@ -2,31 +2,23 @@ package com.stdio.data.repository
 
 import com.stdio.data.api.CoursesApi
 import com.stdio.data.dao.FavoritesDao
+import com.stdio.data.dto.CourseDTO
 import com.stdio.data.entity.FavoriteCourseEntity
 import com.stdio.data.mapper.CourseDTOToCourseMapper
+import com.stdio.data.mapper.CoursesListMapper
+import com.stdio.data.remote.CoursesRemoteDataSource
 import com.stdio.domain.model.Course
+import com.stdio.domain.model.LoadableData
 import com.stdio.domain.repository.CoursesRepository
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CoursesRepositoryImpl @Inject constructor(
-    private val coursesApi: CoursesApi,
+    private val coursesRemoteDataSource: CoursesRemoteDataSource,
     private val favoritesDao: FavoritesDao
 ) : CoursesRepository {
 
-    override suspend fun getCourses(): List<Course> {
-        return try {
-            val response = coursesApi.getCourses()
-            if (response.isSuccessful) {
-                response.body()?.courses?.map(CourseDTOToCourseMapper::map) ?: emptyList()
-            } else {
-                emptyList()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            emptyList()
-        }
-    }
+    override suspend fun getCourses(): LoadableData<List<Course>> = CourseDTOToCourseMapper.map(CoursesListMapper.map(coursesRemoteDataSource.getCourses()))
 
     override suspend fun addToFavorites(courseId: Int) {
         favoritesDao.addToFavorites(FavoriteCourseEntity(courseId))

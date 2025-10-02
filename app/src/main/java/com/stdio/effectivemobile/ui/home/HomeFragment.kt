@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.stdio.domain.model.Course
+import com.stdio.domain.model.LoadableData
 import com.stdio.effectivemobile.HomeViewModel
 import com.stdio.effectivemobile.R
 import com.stdio.effectivemobile.app.App
@@ -41,7 +43,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupRecyclerView()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collect {
-                adapter.submitList(it)
+                when(it.courses) {
+                    is LoadableData.Error -> {}
+                    LoadableData.Loading -> {}
+                    LoadableData.NoState -> {}
+                    is LoadableData.Success<List<Course>> -> adapter.submitList(it.courses.data)
+                }
             }
         }
     }
