@@ -32,8 +32,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels { viewModelFactory }
 
     private val adapter = CoursesAdapter(
-        onFavoriteClick = { courseId, isFavorite ->
-            //viewModel.toggleFavorite(courseId, isFavorite)
+        onFavoriteClick = { course ->
+            viewModel.toggleFavorite(course)
         }
     )
 

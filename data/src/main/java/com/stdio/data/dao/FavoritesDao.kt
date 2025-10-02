@@ -18,6 +18,6 @@ interface FavoritesDao {
     @Delete
     suspend fun removeFromFavorites(favorite: FavoriteCourseEntity)
 
-    @Query("SELECT COUNT(*) FROM favorites WHERE courseId = :courseId")
-    suspend fun isFavorite(courseId: Int): Int
+    @Query("SELECT COUNT(*) FROM favorites WHERE id = :id")
+    suspend fun isFavorite(id: Int): Int
 }

@@ -10,7 +10,7 @@ import com.stdio.effectivemobile.databinding.ItemCourseBinding
 import java.text.SimpleDateFormat
 
 class CoursesAdapter(
-    private val onFavoriteClick: (Int, Boolean) -> Unit
+    private val onFavoriteClick: (course: Course) -> Unit
 ) : ListAdapter<Course, RecyclerView.ViewHolder>(CourseDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -26,7 +26,7 @@ class CoursesAdapter(
 
     class CourseViewHolder(
         private val binding: ItemCourseBinding,
-        private val onFavoriteClick: (Int, Boolean) -> Unit
+        private val onFavoriteClick: (Course) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(course: Course) {
@@ -37,12 +37,14 @@ class CoursesAdapter(
             binding.tvRating.text = course.rate
             binding.tvDate.text = formatDate(course.publishDate)
 
-            // Обработка избранного
-            //binding.favoriteButton.isSelected = course.hasLike
-//            binding.favoriteButton.setOnClickListener {
-//                val newFavoriteState = !course.hasLike
-//                onFavoriteClick(course.id, newFavoriteState)
-//            }
+            if (course.hasLike) {
+                binding.ivFavorite.setImageResource(R.drawable.ic_favorite_full)
+            } else {
+                binding.ivFavorite.setImageResource(R.drawable.ic_favorite)
+            }
+            binding.cvFavorite.setOnClickListener {
+                onFavoriteClick(course)
+            }
         }
 
         private fun formatDate(dateString: String): String {

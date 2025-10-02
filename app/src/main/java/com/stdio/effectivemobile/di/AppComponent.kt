@@ -6,6 +6,7 @@ import com.stdio.core.di.CoreComponent
 import com.stdio.data.di.DataComponent
 import com.stdio.domain.repository.CoursesRepository
 import com.stdio.domain.usecases.IsInputValidUseCase
+import com.stdio.domain.usecases.ToggleFavoriteUseCase
 import com.stdio.effectivemobile.ui.home.HomeViewModel
 import com.stdio.effectivemobile.MainActivity
 import com.stdio.effectivemobile.ui.home.HomeFragment
@@ -37,11 +38,12 @@ class HomeModule {
     @Provides
     @HomeViewModelFactory
     fun provideHomeViewModelFactory(
-        repository: CoursesRepository
+        repository: CoursesRepository,
+        toggleFavoriteUseCase: ToggleFavoriteUseCase
     ): ViewModelProvider.Factory {
         return object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HomeViewModel(repository) as T
+                return HomeViewModel(repository, toggleFavoriteUseCase) as T
             }
         }
     }
