@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.stdio.domain.model.Course
 import com.stdio.effectivemobile.R
 import com.stdio.effectivemobile.databinding.ItemCourseBinding
+import java.text.SimpleDateFormat
 
 class CoursesAdapter(
     private val onFavoriteClick: (Int, Boolean) -> Unit
@@ -30,10 +31,11 @@ class CoursesAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(course: Course) {
+            val context = binding.root.context
             binding.tvTitle.text = course.title
             binding.tvDescription.text = course.text
-            binding.tvPrice.text = "${course.price} ₽"
-            binding.tvRating.text = course.rate.toString()
+            binding.tvPrice.text = context.getString(R.string.price, course.price)
+            binding.tvRating.text = course.rate
             binding.tvDate.text = formatDate(course.publishDate)
 
             // Обработка избранного
@@ -45,8 +47,10 @@ class CoursesAdapter(
         }
 
         private fun formatDate(dateString: String): String {
-            // Форматирование даты согласно макету
-            return dateString
+            val inputForm = SimpleDateFormat("yyyy-MM-dd")
+            val date = inputForm.parse(dateString)
+            val outputFormat = SimpleDateFormat("dd MMMM yyyy")
+            return outputFormat.format(date)
         }
     }
 }
