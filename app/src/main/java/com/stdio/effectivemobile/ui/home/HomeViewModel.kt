@@ -28,11 +28,7 @@ class HomeViewModel @Inject constructor(
     private val _errorFlow = SingleEventFlow<String>()
     val errorFlow = _errorFlow.asSharedFlow()
 
-    init {
-        getCourses()
-    }
-
-    private fun getCourses() {
+    fun getCourses() {
         viewModelScope.launch {
             loadData { repository.getCourses() }.collect { courses ->
                 if (courses is LoadableData.Error) {

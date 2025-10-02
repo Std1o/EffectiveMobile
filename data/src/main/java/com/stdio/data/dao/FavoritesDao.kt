@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FavoritesDao {
     @Query("SELECT * FROM favorites")
-    fun getAllFavorites(): Flow<List<FavoriteCourseEntity>>
+    suspend fun getAllFavorites(): List<FavoriteCourseEntity>
 
     @Insert
     suspend fun addToFavorites(favorite: FavoriteCourseEntity)

@@ -47,6 +47,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getCourses()
+    }
+
     private fun updateView(uiState: CoursesUIState) {
         when (uiState.courses) {
             is LoadableData.Success<List<Course>> -> adapter.submitList(uiState.courses.data)

@@ -43,6 +43,11 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFavorites()
+    }
+
     private fun setupRecyclerView() {
         binding.rvFavorites.adapter = adapter
         binding.rvFavorites.layoutManager = LinearLayoutManager(requireContext())

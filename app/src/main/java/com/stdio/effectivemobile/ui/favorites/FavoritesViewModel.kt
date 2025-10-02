@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.stdio.domain.model.Course
 import com.stdio.domain.repository.CoursesRepository
 import com.stdio.domain.usecases.ToggleFavoriteUseCase
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,12 +15,19 @@ class FavoritesViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {
 
-    val favorites =
-        repository.favorites.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+    private val _favorites = MutableStateFlow<List<Course>>(emptyList())
+    val favorites = _favorites.asStateFlow()
+
+    fun getFavorites() {
+        viewModelScope.launch {
+            _favorites.value = repository.getFavorites()
+        }
+    }
 
     fun toggleFavorite(course: Course) {
         viewModelScope.launch {
             toggleFavoriteUseCase(course)
+            getFavorites()
         }
     }
 }

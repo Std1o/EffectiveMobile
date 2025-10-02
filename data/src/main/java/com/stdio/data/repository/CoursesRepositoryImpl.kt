@@ -22,7 +22,7 @@ class CoursesRepositoryImpl @Inject constructor(
     override suspend fun getCourses(): LoadableData<List<Course>> {
         // domain не должен ничего знать о DTO, поэтому придется написать немного логики здесь
         val favorites =
-            favoritesDao.getAllFavorites().map { it.map(CourseEntityToCourseMapper::map) }.first()
+            favoritesDao.getAllFavorites().map(CourseEntityToCourseMapper::map)
         val favoritesMap = hashMapOf<Int, Boolean>()
         favorites.forEach {
             favoritesMap[it.id] = true
@@ -42,8 +42,8 @@ class CoursesRepositoryImpl @Inject constructor(
         favoritesDao.removeFromFavorites(CourseToCourseEntityMapper.map(course))
     }
 
-    override val favorites =
-        favoritesDao.getAllFavorites().map { it.map(CourseEntityToCourseMapper::map) }
+    override suspend fun getFavorites() =
+        favoritesDao.getAllFavorites().map(CourseEntityToCourseMapper::map)
 
     override suspend fun isCourseFavorite(courseId: Int): Boolean {
         return favoritesDao.isFavorite(courseId) > 0
