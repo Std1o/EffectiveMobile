@@ -1,4 +1,4 @@
-package com.stdio.effectivemobile.common
+package com.stdio.core.common
 
 import kotlin.reflect.KType
 

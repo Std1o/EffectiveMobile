@@ -3,7 +3,7 @@ package com.stdio.effectivemobile.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stdio.domain.model.LoadableData
-import com.stdio.effectivemobile.common.InvalidArgumentException
+import com.stdio.core.common.InvalidArgumentException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

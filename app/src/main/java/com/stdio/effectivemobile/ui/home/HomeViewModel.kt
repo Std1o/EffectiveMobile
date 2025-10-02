@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.stdio.domain.model.LoadableData
 import com.stdio.domain.repository.CoursesRepository
 import com.stdio.effectivemobile.base.BaseViewModel
-import com.stdio.effectivemobile.common.SingleEventFlow
+import com.stdio.core.common.flow.SingleEventFlow
 import com.stdio.effectivemobile.model.CoursesUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow

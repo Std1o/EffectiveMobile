@@ -1,4 +1,4 @@
-package com.stdio.effectivemobile.common
+package com.stdio.core.common.flow
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.FlowCollector
