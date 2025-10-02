@@ -63,6 +63,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.2")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
 
     implementation("com.hannesdorfmann:adapterdelegates4:4.3.2")
 }
