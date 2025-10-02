@@ -16,6 +16,7 @@ import com.stdio.effectivemobile.R
 import com.stdio.effectivemobile.app.App
 import com.stdio.effectivemobile.common.extensions.viewBinding
 import com.stdio.effectivemobile.databinding.FragmentHomeBinding
+import com.stdio.effectivemobile.di.HomeViewModelFactory
 import com.stdio.effectivemobile.model.CoursesUIState
 import com.stdio.effectivemobile.ui.adapter.CoursesAdapter
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding(FragmentHomeBinding::bind)
 
     @Inject
+    @HomeViewModelFactory
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: HomeViewModel by viewModels { viewModelFactory }
 

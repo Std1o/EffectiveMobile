@@ -5,9 +5,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.stdio.core.di.CoreComponent
 import com.stdio.data.di.DataComponent
 import com.stdio.domain.repository.CoursesRepository
+import com.stdio.domain.usecases.IsInputValidUseCase
 import com.stdio.effectivemobile.ui.home.HomeViewModel
 import com.stdio.effectivemobile.MainActivity
 import com.stdio.effectivemobile.ui.home.HomeFragment
+import com.stdio.effectivemobile.ui.login.LoginFragment
+import com.stdio.effectivemobile.ui.login.LoginViewModel
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -19,6 +22,7 @@ import javax.inject.Singleton
     dependencies = [DataComponent::class] // Зависим от DataComponent
 )
 interface AppComponent {
+    fun inject(fragment: LoginFragment)
     fun inject(fragment: HomeFragment)
 
     @Component.Factory
@@ -31,12 +35,25 @@ interface AppComponent {
 class HomeModule {
 
     @Provides
+    @HomeViewModelFactory
     fun provideHomeViewModelFactory(
         repository: CoursesRepository
     ): ViewModelProvider.Factory {
         return object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return HomeViewModel(repository) as T
+            }
+        }
+    }
+
+    @Provides
+    @LoginViewModelFactory
+    fun provideLoginViewModelFactory(
+        inputValidUseCase: IsInputValidUseCase
+    ): ViewModelProvider.Factory {
+        return object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return LoginViewModel(inputValidUseCase) as T
             }
         }
     }
