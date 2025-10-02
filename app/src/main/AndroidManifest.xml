@@ -15,10 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EffectiveMobile">
         <activity
-            android:name=".MainHostActivity"
-            android:exported="false"
-            android:label="@string/title_activity_main_host" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

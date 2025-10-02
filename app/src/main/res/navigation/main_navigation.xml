@@ -9,5 +9,13 @@
         android:id="@+id/loginFragment"
         android:name="com.stdio.effectivemobile.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_coursesHostFragment"
+            app:destination="@id/coursesHostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coursesHostFragment"
+        android:name="com.stdio.effectivemobile.ui.CoursesHostFragment"
+        android:label="CoursesHostFragment" />
 </navigation>
