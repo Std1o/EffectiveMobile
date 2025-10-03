@@ -39,7 +39,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.button.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_coursesHostFragment)
         }
-        disableCyrillic()
         addTextWatchersForCheckInput()
         viewModel.isButtonEnabled.observe(viewLifecycleOwner, result = {
             binding.button.isEnabled = it
@@ -53,19 +52,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             val browserIntent = Intent(Intent.ACTION_VIEW, "https://ok.ru/".toUri())
             startActivity(browserIntent)
         }
-    }
-
-    private fun disableCyrillic() {
-        val filter = InputFilter { source, start, end, dest, dstart, dend ->
-            for (i in start until end) {
-                if (Character.UnicodeBlock.of(source[i]) == Character.UnicodeBlock.CYRILLIC) {
-                    return@InputFilter ""
-                }
-            }
-            null
-        }
-
-        binding.etEmail.filters = arrayOf(filter)
     }
 
     private fun addTextWatchersForCheckInput() {
@@ -82,6 +68,24 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
 
         }
+        binding.etEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                s?.let {
+                    val text = it.toString()
+                    val cyrillicPattern = "[а-яА-ЯёЁ]".toRegex()
+
+                    if (cyrillicPattern.containsMatchIn(text)) {
+                        val filteredText = cyrillicPattern.replace(text, "")
+                        binding.etEmail.setText(filteredText)
+                        binding.etEmail.setSelection(filteredText.length)
+                    }
+                }
+            }
+        })
         binding.etEmail.addTextChangedListener(textWatcher)
         binding.etPassword.addTextChangedListener(textWatcher)
     }
