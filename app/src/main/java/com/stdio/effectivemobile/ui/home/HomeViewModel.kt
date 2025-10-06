@@ -5,6 +5,7 @@ import com.stdio.core.common.flow.SingleEventFlow
 import com.stdio.domain.model.Course
 import com.stdio.domain.model.LoadableData
 import com.stdio.domain.repository.CoursesRepository
+import com.stdio.domain.usecases.GetCoursesUseCase
 import com.stdio.domain.usecases.ToggleFavoriteUseCase
 import com.stdio.effectivemobile.base.BaseViewModel
 import com.stdio.effectivemobile.model.CoursesUIState
@@ -16,8 +17,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val repository: CoursesRepository,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
+    private val getCoursesUseCase: GetCoursesUseCase
 ) :
     BaseViewModel() {
 
@@ -34,7 +35,7 @@ class HomeViewModel @Inject constructor(
 
     fun getCourses() {
         viewModelScope.launch {
-            loadData { repository.getCourses() }.collect { courses ->
+            loadData { getCoursesUseCase() }.collect { courses ->
                 if (courses is LoadableData.Error) {
                     _errorFlow.emit(courses.exception)
                 } else {
