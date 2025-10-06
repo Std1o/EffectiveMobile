@@ -20,17 +20,10 @@ class CoursesRepositoryImpl @Inject constructor(
 ) : CoursesRepository {
 
     override suspend fun getCourses(): LoadableData<List<Course>> {
-        // domain не должен ничего знать о DTO, поэтому придется написать немного логики здесь
-        val favorites =
-            favoritesDao.getAllFavorites().map(CourseEntityToCourseMapper::map)
-        val favoritesMap = hashMapOf<Int, Boolean>()
-        favorites.forEach {
-            favoritesMap[it.id] = true
-        }
         return CourseDTOToCourseMapper.map(
             CoursesResponseToCoursesListMapper.map(
                 coursesRemoteDataSource.getCourses()
-            ), favoritesMap
+            )
         )
     }
 

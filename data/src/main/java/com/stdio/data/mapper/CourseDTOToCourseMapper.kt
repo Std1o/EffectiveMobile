@@ -4,17 +4,15 @@ import com.stdio.data.dto.CourseDTO
 import com.stdio.domain.mapper.LoadableDataListMapper
 import com.stdio.domain.model.Course
 
-object CourseDTOToCourseMapper : CoursesAbstractListMapper() {
-    override fun getSuccess(input: CourseDTO, favorites: Map<Int, Boolean>): Course = Course(
+object CourseDTOToCourseMapper : LoadableDataListMapper<CourseDTO, Course>() {
+    override fun getSuccess(input: CourseDTO): Course = Course(
         id = input.id,
         title = input.title,
         text = input.text,
         price = input.price,
         rate = input.rate,
         startDate = input.startDate,
-        // hasLike true НЕ ДОЛЖЕН приходить с сервера
-        // в ТЗ написано про ЛОКАЛЬНУЮ БД
-        hasLike = favorites[input.id] ?: false,
+        hasLike = input.hasLike,
         publishDate = input.publishDate
     )
 }

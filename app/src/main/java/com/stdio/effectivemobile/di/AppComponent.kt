@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.stdio.data.di.DataComponent
 import com.stdio.domain.repository.CoursesRepository
+import com.stdio.domain.usecases.GetCoursesUseCase
 import com.stdio.domain.usecases.IsInputValidUseCase
 import com.stdio.domain.usecases.ToggleFavoriteUseCase
 import com.stdio.effectivemobile.ui.favorites.FavoritesFragment
@@ -39,12 +40,12 @@ class HomeModule {
     @Provides
     @HomeViewModelFactory
     fun provideHomeViewModelFactory(
-        repository: CoursesRepository,
-        toggleFavoriteUseCase: ToggleFavoriteUseCase
+        toggleFavoriteUseCase: ToggleFavoriteUseCase,
+        getCoursesUseCase: GetCoursesUseCase
     ): ViewModelProvider.Factory {
         return object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HomeViewModel(repository, toggleFavoriteUseCase) as T
+                return HomeViewModel(toggleFavoriteUseCase, getCoursesUseCase) as T
             }
         }
     }
